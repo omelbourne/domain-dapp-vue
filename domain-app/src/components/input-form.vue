@@ -1,12 +1,14 @@
 <script setup>
 import { ref } from "vue";
 import { ethers } from "ethers";
-import contractAbi from "../../../domain-contracts/artifacts/contracts/Domains.sol/Domains";
-console.log(contractAbi);
+import {
+  CONTRACT_ABI,
+  CONTRACT_ADDRESS
+} from "../../constants";
+console.log(CONTRACT_ABI);
 const domain = ref("");
 const record = ref("");
 const tld = ref(".melbs");
-const CONTRACT_ADDRESS = "0xd1bd21af954592830D9389a7c40E3c09F3f987A9";
 async function mintDomain() {
   if (!domain.value) {
     return;
@@ -29,7 +31,7 @@ async function mintDomain() {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(
         CONTRACT_ADDRESS,
-        contractAbi.abi,
+        CONTRACT_ABI,
         signer
       );
       console.log("talk to the wallet and pay gas");
